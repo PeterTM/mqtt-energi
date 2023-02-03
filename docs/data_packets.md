@@ -1,7 +1,9 @@
+# Packet Format
 All packets are recieved as raw ethernet frames with a protocol set as type 0x88b5 which wireshark identifies as 'Local Experimental Ethertype 1'
 
 Following the ethernet header, various types of data packets can be seen from coming from the device. 
 
+## Header
 All packets start with a 19 byte long header formatted as below
 
 | Start Address | Size (Bytes) | Description        | Contents            |
@@ -14,6 +16,7 @@ All packets start with a 19 byte long header formatted as below
 |      0x19     |       1      | Device Type ?      | Always 0x53         |
 
 Various Types of packets have been observed so far. 
+## Packet Types
 
 | Packet Type | Data Length (Bytes) | Contents                        |
 |-------------|---------------------|---------------------------------|
@@ -29,7 +32,7 @@ Various Types of packets have been observed so far.
 
 The following Packets have been decoded (or partially decoded) so far
 
-## 0x1F - Frequecny & Voltage
+### 0x1F - Frequecny & Voltage
 
 | Start Address | Size (Bytes) | Data Type | Description    | Post Processing |
 |---------------|--------------|-----------|----------------|-----------------|
@@ -37,7 +40,7 @@ The following Packets have been decoded (or partially decoded) so far
 |      0x22     | 2            |   int16   | Grid Frequency | Divide by 100   |
 |      0x32     | 2            |   int16   | Voltage        | Divide by 10    |
 
-## 0x22 - Generation and Grid
+### 0x22 - Generation and Grid
 
 
 | Start Address | Size (Bytes) | Data Type | Description      | Post Processing |
@@ -47,7 +50,7 @@ The following Packets have been decoded (or partially decoded) so far
 |      0x32     | 2            |   int16   | Diverting Power  | N/A             |
 |      0x2E     | 4            |   int32   | Serial Number    | N/A             |
 
-## 0x20 - Unknown
+### 0x20 - Unknown
 
 | Start Address | Size (Bytes) | Data Type | Description   | Post Processing |
 |---------------|--------------|-----------|---------------|-----------------|
@@ -55,7 +58,7 @@ The following Packets have been decoded (or partially decoded) so far
 |      0x2C     |       2      |   int16   | Diverted kWh  |   / 1000        |
 
 
-## 0x27 - Unknown
+### 0x27 - Unknown
 
 | Start Address | Size (Bytes) | Data Type | Description   | Post Processing |
 |---------------|--------------|-----------|---------------|-----------------|
