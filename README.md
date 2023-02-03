@@ -10,5 +10,5 @@ This is a hobby project that is not affiliated with MyEnergi ltd in any way. Use
 ## Index
 * Communication Overview
 * Packet Capture Setup
-* Data Packets Format
+* [Data Packets Format]
 * MQTT Bridge
