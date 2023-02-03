@@ -14,4 +14,4 @@ This is a hobby project that is not affiliated with MyEnergi ltd in any way. Use
 * MQTT Bridge
 
 
-[Data Packets Format]: docs/data-packets.md
+[Data Packets Format]: docs/data_packets.md
