@@ -12,3 +12,6 @@ This is a hobby project that is not affiliated with MyEnergi ltd in any way. Use
 * Packet Capture Setup
 * [Data Packets Format]
 * MQTT Bridge
+
+
+[Data Packets Format]: docs/Data-packets.md
