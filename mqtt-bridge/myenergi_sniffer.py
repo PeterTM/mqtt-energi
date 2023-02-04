@@ -10,7 +10,6 @@ NIC = "eno1"
 MAC = b'\x94\xe6\x86\xa2\x8b@'
 
 DATA_HEADER = (0xcb,0xda,0xe9,0xf8) # Myenergi packet header
-ETH_P_ALL = 0x0003          # Every packet 
 ETH_FRAME_LEN = 1514        # Ethernet frame len
 ETH_HLEN = 14               # Ethernet header len
 PKT_TYPE = 0x88b5           # Experimental Ethertype 1
@@ -129,7 +128,7 @@ def decode_packet(eth_pkt):
 def main():
     mqtt = connect_mqtt(MQTT_BROKER, MQTT_PORT)
     mqtt.loop_start()
-    with socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(ETH_P_ALL)) as server_socket: #Recoeve Raw Frames
+    with socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(PKT_TYPE)) as server_socket: #Recoeve Raw Frames
         server_socket.bind((NIC, 0))
         promisc.set(NIC,True)
         with selectors.DefaultSelector() as selector:
