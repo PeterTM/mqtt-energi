@@ -12,7 +12,7 @@ I have used [Wireshark](https://www.wireshark.org/) to capture the data from the
 
 > eth.type == 0x88b5 && eth.dst == 71:b3:d5:3a:6f:00
 
-Once packets are captures, the payloads can be exported as bin files and analysed. 
+Once packets are captured, the payloads can be exported as bin files and analysed. 
 
 
 
