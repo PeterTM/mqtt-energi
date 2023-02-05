@@ -31,7 +31,7 @@ def decode_packet(eth_pkt):
         div_wh = int.from_bytes(eth_pkt[0x2c:0x2e], "little")
         data = {
             'serial':serialno,
-            'diverted_kWh':div_wh/1000
+            'diverted_kWh':div_wh/100
         }
 
     elif packet_type == 0x27: #Data ?
