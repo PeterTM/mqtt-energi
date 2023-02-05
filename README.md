@@ -10,9 +10,11 @@ This has been tested on a V2.1 Eddi as that is the only device I have. Its proba
 This is a hobby project that is not affiliated with MyEnergi ltd in any way. Use at your own risk. All company and product names are copyright of their respective owners.
 
 ## Index
+* [Communication Overview]
 * [Data Packets Format]
 * [MQTT Bridge]
 
 
 [Data Packets Format]: docs/data_packets.md
 [MQTT Bridge]: docs/mqtt_bridge.md
+[Communication Overview]: docs/communication.md
