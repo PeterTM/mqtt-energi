@@ -55,7 +55,7 @@ The following Packets have been decoded (or partially decoded) so far
 | Start Address | Size (Bytes) | Data Type | Description   | Post Processing |
 |---------------|--------------|-----------|---------------|-----------------|
 |      0x1E     |       4      |   int32   | Serial Number | N/A             |
-|      0x2C     |       2      |   int16   | Diverted kWh  |   / 1000        |
+|      0x2C     |       2      |   int16   | Diverted kWh  |   / 100        |
 
 
 ### 0x27 - Unknown
