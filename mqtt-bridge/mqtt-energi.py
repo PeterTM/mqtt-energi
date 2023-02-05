@@ -18,8 +18,10 @@ def exit_handler():
 atexit.register(exit_handler)
 
 def main():
-    mqtt = mqtt_handler.connect(settings['MQTT']['BROKER'], int(settings['MQTT']['PORT']))
+    mqtt = mqtt_handler.connect(settings['MQTT']['BROKER'], int(settings['MQTT']['PORT']),settings['MQTT']['ID'])
     mqtt.loop_start()
+    debug = settings.getboolean('DEBUG','Enabled')
+    print(f'Debug: {debug}')
     with socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(constants.PKT_TYPE)) as server_socket: #Recieve Raw Frames
         server_socket.bind((settings['NETWORK']['NIC'], 0))
         promisc.set(settings['NETWORK']['NIC'],True) # set NIC to promiscuous mode
@@ -35,7 +37,7 @@ def main():
                     if protocol == constants.PKT_TYPE:
                         start = struct.unpack('4B',payload[:4])
                         if start == constants.DATA_HEADER:
-                            data = decode_packet(payload)
+                            data = decode_packet(payload, debug)
                             if data:
                                 print(data)
                             for key in data:

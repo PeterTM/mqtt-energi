@@ -13,7 +13,7 @@ This has only been tested recieving the following data from a Eddi V2.1 unit. Ot
 ## Setup
 Your python installation needs paho.mqtt installed
 
-in file config.ini, you need to set your broker IP and port, and the topic you want the data posted to. The data will be posted to 
+in file config.ini, you need to set your broker IP and port, the topic you want the data posted to, and a unique client ID. The data will be posted to 
 
 > {topic}/{serialnumber}/{data}
 
