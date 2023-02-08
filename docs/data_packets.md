@@ -4,7 +4,7 @@ All packets are recieved as raw ethernet frames with a protocol set as type 0x88
 Following the ethernet header, various types of data packets can be seen from coming from the device. 
 
 ## Header
-All packets start with a 19 byte long header formatted as below
+All packets start with a 30 byte long header formatted as below
 
 | Start Address | Size (Bytes) | Description        | Contents            |
 |---------------|--------------|--------------------|---------------------|
@@ -12,37 +12,64 @@ All packets start with a 19 byte long header formatted as below
 |      0x04     |      16      | Unknown (Padding?) | 0x00                |
 |      0x14     |       1      | Unknown            | 0x01                |
 |      0x15     |       3      | Unknown (Padding)  | 0x00                |
-|      0x18     |       1      | Packet Type ?      | Various (See Below) |
+|      0x18     |       1      | Message Length     | Various (See Below) |
 |      0x19     |       1      | Device Type ?      | Always 0x53         |
+|      0x1A     |       2      | Message Type  1  ? |                     |
+|      0x1B     |       2      | Message Type  2  ? |                     |
 
 Various Types of packets have been observed so far. 
 ## Packet Types
 
-| Packet Type | Data Length (Bytes) | Contents                        | Transmit Rate (Seconds) | 
+| Packet Len  | Data Length (Bytes) | Contents                        | Transmit Rate (Seconds) | 
 |-------------|---------------------|---------------------------------|-------------------------|
-|     0x1F    |          55         | Frequency & Voltage Information |            24           |
-|     0x20    |          56         | Energy Info                     |            12           |
-|     0x22    |          58         | Generation & Grid Power         |            2            |
-|     0x27    |          63         | Unknown (Diverter Info)         |            4            |
-|     0x2B    |          67         | Unknown                         |            12           |
-|     0x36    |          78         | Unknown (Freq&Voltage Data)     |            2            |
+|     0x1F    |          55         | Eddi Data (Packet Type 1)       |            24           |
+|     0x20    |          56         | Eddi Data (Packet Type 2)       |            12           |
+|     0x2B    |          67         | Eddi Data (Packet Type 3)       |            12           |
+|     0x22    |          58         | CT Readings?                    |            2            |
+|     0x27    |          63         | Unknown                         |            4            |
+|     0x36    |          78         | Unknown                         |            2            |
 |     0x37    |          79         | Unknown                         |            tbc          |
 |     0x38    |          80         | Unknown                         |            tbc          |
 |     0x39    |          81         | Unknown                         |            tbc          |
 
 The following Packets have been decoded (or partially decoded) so far
 
-### 0x1F - Frequecny & Voltage
+### 0x1F - Eddi Data (Packet Type 1)
+
+Transmitted Approx Every 12 seconds
+
+| Start Address | Size (Bytes) | Data Type | Description    | Post Processing |
+|---------------|--------------|-----------|----------------|-----------------|
+|      0x1E     |       4      |   int32   | Serial Number  | N/A             |
+|      0x22     |       2      |   int16   | Grid Frequency | Divide by 100   |
+|      0x2C     |       2      |   int16   | Diverted kWh   |   / 100         |
+|      0x32     |       2      |   int16   | Voltage        | Divide by 10    |
+
+###  0x20 - Eddi Data (Packet Type 2)
 
 Transmitted Approx Every 24 seconds
 
 | Start Address | Size (Bytes) | Data Type | Description    | Post Processing |
 |---------------|--------------|-----------|----------------|-----------------|
-|      0x1E     | 4            |   int32   | Serial Number  | N/A             |
-|      0x22     | 2            |   int16   | Grid Frequency | Divide by 100   |
-|      0x32     | 2            |   int16   | Voltage        | Divide by 10    |
+|      0x1E     |       4      |   int32   | Serial Number  | N/A             |
+|      0x22     |       2      |   int16   | Grid Frequency | Divide by 100   |
+|      0x2C     |       2      |   int16   | Diverted kWh   |   / 100         |
 
-### 0x22 - Generation and Grid
+
+### 0x2B - Eddi Data (Packet Type 3)
+
+Transmitted approx ever 12 seconds
+
+| Start Address | Size (Bytes) | Data Type | Description                                             | Post Processing |
+|---------------|--------------|-----------|---------------------------------------------------------|-----------------|
+|      0x1E     |       4      |   int32   | Serial Number                                           | N/A             |
+|      0x22     |       2      |   int16   | Frequency                                               | Divide by 100   |
+|      0x2C     |       2      |   int16   | Diverted kwH                                            | Divide by 100   | 
+|      0x3C     |       2      |   int16   | Generation Power                                        |                 |
+|      0x34     |       2      |   int16   | Grid Power                                              |                 |
+
+
+### 0x22 - CT Readings?
 
 Transmitted Approx ever 2 seconds
 
@@ -53,16 +80,6 @@ Transmitted Approx ever 2 seconds
 |      0x32     | 2            |   int16   | Diverting Power  | N/A             |
 |      0x2E     | 4            |   int32   | Serial Number    | N/A             |
 
-### 0x20 - Unknown
-
-Transmitted Approx every 12 seconds
-
-| Start Address | Size (Bytes) | Data Type | Description   | Post Processing |
-|---------------|--------------|-----------|---------------|-----------------|
-|      0x1E     |       4      |   int32   | Serial Number | N/A             |
-|      0x2C     |       2      |   int16   | Diverted kWh  |   / 100         |
-|      0x22     |       2      |   int16   | Frequency?    |   / 10          |
-
 
 ### 0x27 - Unknown
 
@@ -71,21 +88,12 @@ Transmitted approx every 4 seconds
 | Start Address | Size (Bytes) | Data Type | Description                                             | Post Processing |
 |---------------|--------------|-----------|---------------------------------------------------------|-----------------|
 |      0x1E     |       4      |   int32   | Serial Number                                           | N/A             |
+|      0x22     |       2      |   int16   | Grid Frequency                                          | Divide by 100   |
+|      0x2C     |       2      |   int16   | Diverted kWh                                            |   / 100         |
 |      0x36     |       2      |   int16   | Firmware Version (But appears to occasionally go blank) |                 | 
 |      0x38     |       2      |   int16   | Firmware Version2(But appears to occasionally go blank) |                 |
 |      0x3A     |       2      |   int16   | Unknown                                                 |                 | 
 |      0x3D     |       2      |   int16   | Unknown. Seems to track diverter power but not exactly  |                 |
-
-
-### 0x2B - Unknown
-
-Transmitted approx ever 12 seconds
-
-| Start Address | Size (Bytes) | Data Type | Description                                             | Post Processing |
-|---------------|--------------|-----------|---------------------------------------------------------|-----------------|
-|      0x1E     |       4      |   int32   | Serial Number                                           | N/A             |
-|      0x22     |       2      |   int16   | Frequency                                               |                 | 
-|      0x3C     |       2      |   int16   | Generation Power                                        |                 |
 
 
 ### 0x36 - Unknown
@@ -97,3 +105,11 @@ Transmitted approx every 2 seconds
 |      0x4A     |       4      |   int32   | Serial Number                                           | N/A             |
 |      0x3A     |       2      |   int16   | Frequency (Seems to update faster than 0x1F)            |                 | 
 |      0x38     |       2      |   int16   | Voltage (Seems to update faster than 0x1F)              |                 |
+
+### 0x37 - Unknown
+
+
+| Start Address | Size (Bytes) | Data Type | Description                                             | Post Processing |
+|---------------|--------------|-----------|---------------------------------------------------------|-----------------|
+|      0x1E     |       4      |   int32   | Serial Number                                           | N/A             |
+
