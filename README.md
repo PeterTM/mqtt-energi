@@ -1,15 +1,24 @@
 # mqtt-energi
-Protocol documentation and mqtt bridge for the myenergi device to device communications
+Protocol documentation myenergi device to device communications and nd mqtt bridge for local data access
 
 ## Introduction
 This repository is meant to document reverse engineering attempts on the device-to-device communications used between myenergi devices for the purposes of intercepting them and posting the data to a local MQTT server. 
 
-This has been tested on a V2.1 Eddi as that is the only device I have. It might be able to recieve packets from other myenergi devices, but cant do anything with them as it wont understand the format of the data. 
-
-V1 devices (without an ethernet port or wifi) wont work at all as this relies on intercepting the device to device communications that happen over the network. 
-
 ## Disclaimer
 This is a hobby project that is not affiliated with MyEnergi ltd in any way. Use at your own risk. All company and product names are copyright of their respective owners.
+
+## Current Capabilities
+The MQTT Bridge can currently extract the following information from A V2.1 Eddi. It might be able to recieve packets from other myenergi devices, but cant do anything with them as it wont understand the format of the data. 
+
+* Serial Number
+* Supply Voltage
+* Supply Frequency
+* Grid Power
+* Generation Power
+* Diverting Power
+* Total Diverted Energy per day. 
+
+V1 devices (without an ethernet port or wifi) wont work at all as this relies on intercepting the device to device communications that happen over the network. 
 
 ## Index
 * [Communication Overview]
