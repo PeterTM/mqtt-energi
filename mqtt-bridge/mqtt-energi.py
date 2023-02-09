@@ -18,7 +18,7 @@ def exit_handler():
 atexit.register(exit_handler)
 
 def main():
-    mqtt = mqtt_handler.connect(settings['MQTT']['BROKER'], int(settings['MQTT']['PORT']),settings['MQTT']['ID'])
+    mqtt = mqtt_handler.connect(settings['MQTT']['BROKER'], int(settings['MQTT']['PORT']),settings['MQTT']['ID'],settings['MQTT']['User'],settings['MQTT']['pass'])
     mqtt.loop_start()
     debug = settings.getboolean('DEBUG','Enabled')
     print(f'Debug: {debug}')
