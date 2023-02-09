@@ -35,14 +35,15 @@ def decode_packet(eth_pkt,debug):
             grid_pow = int.from_bytes(eth_pkt[0x34:0x36], "little", signed=True) 
             div_pow = int.from_bytes(eth_pkt[0x41:0x43], "little", signed=True)
             v1 = int.from_bytes(eth_pkt[0x41:0x43], "little",signed=True) # proportional to generation
-            data = {
-                'serial':serialno,
-                'frequency':freq/100,
-                'diverted_kWh':div_wh/100,
-                'gen_pwr':gen_pow,
-                'grid_pwr':grid_pow,
-                'divert_pwr':div_pow,
-                }
+            if debug:
+                data = {
+                    'serial':serialno,
+                    'frequency':freq/100,
+                    'diverted_kWh':div_wh/100,
+                    'gen_pwr':gen_pow,
+                    'grid_pwr':grid_pow,
+                    'divert_pwr':div_pow,
+                    }
 
     elif packet_type == 0x22: # CT Readings
         gen_pow = int.from_bytes(eth_pkt[0x22:0x24], "little",signed=True) # Generation Power

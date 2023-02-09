@@ -20,20 +20,20 @@ All packets start with a 30 byte long header formatted as below
 Various Types of packets have been observed so far. 
 ## Packet Types
 
-| Packet Len  | Data Length (Bytes) | Contents                        | Transmit Rate (Seconds) | 
-|-------------|---------------------|---------------------------------|-------------------------|
-|     0x1F    |          55         | Eddi Data (Packet Type 1)       |            24           |
-|     0x20    |          56         | Eddi Data (Packet Type 2)       |            12           |
-|     0x2B    |          67         | Eddi Data (Packet Type 3)       |            12           |
-|     0x2C    |          68         | ??                              |            12           |
-|     0x2D    |          69         | ??                              |            12           |
-|     0x22    |          58         | CT Readings?                    |            2            |
-|     0x27    |          63         | Unknown                         |            4            |
-|     0x36    |          78         | Unknown                         |            2            |
-|     0x37    |          79         | Unknown                         |            tbc          |
-|     0x38    |          80         | Unknown                         |            tbc          |
-|     0x39    |          81         | Unknown                         |            tbc          |
-|     0x3a    |          81         | Unknown                         |            tbc          |
+| Packet Len  | Data Length (Bytes) | Contents                        | Transmit Rate (Seconds) |  Notes                       |
+|-------------|---------------------|---------------------------------|-------------------------|------------------------------|
+|     0x1F    |          55         | Eddi Data (Packet Type 1)       |            24           |                              |
+|     0x20    |          56         | Eddi Data (Packet Type 2)       |            12           |                              |
+|     0x2B    |          67         | Eddi Data (Packet Type 3)       |            12           | data not consistant          |
+|     0x2C    |          68         | ??                              |            12           |                              |
+|     0x2D    |          69         | ??                              |            12           |                              |
+|     0x22    |          58         | CT Readings?                    |            2            |                              |
+|     0x27    |          63         | Unknown                         |            4            |                              |
+|     0x36    |          78         | Unknown                         |            2            |                              |
+|     0x37    |          79         | Unknown                         |            tbc          |                              |
+|     0x38    |          80         | Unknown                         |            tbc          |                              |
+|     0x39    |          81         | Unknown                         |            tbc          |                              |
+|     0x3a    |          82         | Unknown                         |            tbc          |                              |
 
 The following Packets have been decoded (or partially decoded) so far
 
