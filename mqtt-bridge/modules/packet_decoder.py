@@ -19,14 +19,15 @@ def decode_packet(eth_pkt,debug):
 
     elif packet_type == 0x20: # Diverter Data?
         serialno = int.from_bytes(eth_pkt[0x1e:0x22], "little")
-        freq = int.from_bytes(eth_pkt[0x22:0x24], "little")
         div_wh = int.from_bytes(eth_pkt[0x2c:0x2e], "little")
+        divert_pwr = int.from_bytes(eth_pkt[0x34:0x36], "little")
+        divert_cur = int.from_bytes(eth_pkt[0x36:0x38], "little")
         data = {
             'serial':serialno,
-            'frequency':freq/100,
-            'diverted_kWh':div_wh/100
+            'diverted_kWh':div_wh/100,
+            'divert_pwr':divert_pwr,
+            'divert_cur':divert_cur,
         }
-
     elif packet_type == 0x2B: #Data ?
             serialno = int.from_bytes(eth_pkt[0x1e:0x22], "little")
             freq = int.from_bytes(eth_pkt[0x22:0x24], "little") 

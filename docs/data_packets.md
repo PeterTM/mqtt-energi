@@ -57,6 +57,8 @@ Transmitted Approx Every 24 seconds
 |      0x1E     |       4      |   int32   | Serial Number  | N/A             |
 |      0x22     |       2      |   int16   | Grid Frequency | Divide by 100   |
 |      0x2C     |       2      |   int16   | Diverted kWh   |   / 100         |
+|      0x34     |       2      |   int16   | Divert Power   |   / 100         |
+|      0x34     |       2      |   int16   | Divert Current |   / 100         |
 
 
 ### 0x2B - Eddi Data (Packet Type 3)
