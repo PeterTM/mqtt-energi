@@ -27,8 +27,10 @@ def decode_packet(eth_pkt,debug):
         divert_pwr = int.from_bytes(eth_pkt[0x34:0x36], "little")
         divert_cur = int.from_bytes(eth_pkt[0x36:0x38], "little")
         status = status_decode(int(eth_pkt[0x2F]))
+        status2 = status_decode(int(eth_pkt[0x25]))
         heater1 = status[7]
         heater2 = status[6]
+        stopped = status2[7]
 
         data = {
             'serial':serialno,
@@ -37,6 +39,7 @@ def decode_packet(eth_pkt,debug):
             'divert_cur':divert_cur,
             'heater1':heater1,
             'heater2':heater2,
+            'stopped':stopped
         }
     elif packet_type == 0x2B: #Data ?
             serialno = int.from_bytes(eth_pkt[0x1e:0x22], "little")
