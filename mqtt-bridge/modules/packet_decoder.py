@@ -1,3 +1,7 @@
+import struct
+
+def status_decode(inbyte):
+    return [1 if inbyte & (1 << (7-n)) else 0 for n in range(8)]
 
 
 def decode_packet(eth_pkt,debug):
@@ -22,11 +26,17 @@ def decode_packet(eth_pkt,debug):
         div_wh = int.from_bytes(eth_pkt[0x2c:0x2e], "little")
         divert_pwr = int.from_bytes(eth_pkt[0x34:0x36], "little")
         divert_cur = int.from_bytes(eth_pkt[0x36:0x38], "little")
+        status = status_decode(int(eth_pkt[0x2F]))
+        heater1 = status[7]
+        heater2 = status[6]
+
         data = {
             'serial':serialno,
             'diverted_kWh':div_wh/100,
             'divert_pwr':divert_pwr,
             'divert_cur':divert_cur,
+            'heater1':heater1,
+            'heater2':heater2,
         }
     elif packet_type == 0x2B: #Data ?
             serialno = int.from_bytes(eth_pkt[0x1e:0x22], "little")

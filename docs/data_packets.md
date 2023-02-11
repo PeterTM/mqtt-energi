@@ -58,7 +58,9 @@ Transmitted Approx Every 24 seconds
 |      0x22     |       2      |   int16   | Grid Frequency | Divide by 100   |
 |      0x2C     |       2      |   int16   | Diverted kWh   |   / 100         |
 |      0x34     |       2      |   int16   | Divert Power   |   / 100         |
-|      0x34     |       2      |   int16   | Divert Current |   / 100         |
+|      0x36     |       2      |   int16   | Divert Current |   / 100         |
+|      0x2F.7   |       1      | bool      | Heater 1 Active|  N/A            |
+|      0x2F.8   |       1      | bool      | Heater 2 Active|  N/A            |
 
 
 ### 0x2B - Eddi Data (Packet Type 3)
