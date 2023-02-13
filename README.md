@@ -18,6 +18,7 @@ The MQTT Bridge can currently extract the following information from A V2.1 Eddi
 * Diverting Power
 * Total Diverted Energy per day. 
 * Active heater channel
+* Boost State
 
 V1 devices (without an ethernet port or wifi) wont work at all as this relies on intercepting the device to device communications that happen over the network. 
 

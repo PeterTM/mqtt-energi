@@ -57,11 +57,19 @@ Transmitted Approx Every 24 seconds
 |      0x1E     |       4      |   int32   | Serial Number  | N/A             |
 |      0x22     |       2      |   int16   | Grid Frequency | Divide by 100   |
 |      0x2C     |       2      |   int16   | Diverted kWh   |   / 100         |
+|      0x24     |       2      |   bool    | Status Bit?    |                 |
 |      0x26     |       2      |   int16   | Max PWM?       |                 |
 |      0x34     |       2      |   int16   | Divert Power   |   / 100         |
 |      0x36     |       2      |   int16   | Divert Current?|   / 100         |
+|      0x2E.0   |       1      | bool      | Boosting       |  N/A            |
 |      0x2F.7   |       1      | bool      | Heater 1 Active|  N/A            |
 |      0x2F.6   |       1      | bool      | Heater 2 Active|  N/A            |
+|      0x2F.5   |       1      | bool      | unknown        |  N/A            |
+|      0x2F.4   |       1      | bool      | unknown        |  N/A            |
+|      0x2F.3   |       1      | bool      | unknown        |  N/A            |
+|      0x2F.2   |       1      | bool      | unknown        |  N/A            |
+|      0x2F.1   |       1      | bool      | unknown        |  N/A            |
+|      0x2F.0   |       1      | bool      | unknown        |  N/A            |
 |      0x25.7   |       1      | bool      | Stopped Mode   |  N/A            |
 
 
