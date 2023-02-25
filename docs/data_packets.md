@@ -77,7 +77,7 @@ Transmitted Approx Every 24 seconds
 
 ### 0x2B - Eddi Data (Packet Type 3)
 
-Transmitted approx ever 12 seconds
+Transmitted approx ever 12 seconds. Occasionally sends odd vales for generation & grid power
 
 | Start Address | Size (Bytes) | Data Type | Description                                             | Post Processing |
 |---------------|--------------|-----------|---------------------------------------------------------|-----------------|
@@ -118,11 +118,13 @@ Transmitted approx every 4 seconds
 ### 0x36 - Unknown
 
 Transmitted approx every 2 seconds
+Occassionally drops all readings to zero. 
 
 | Start Address | Size (Bytes) | Data Type | Description                                             | Post Processing |
 |---------------|--------------|-----------|---------------------------------------------------------|-----------------|
 |      0x4A     |       4      |   int32   | Serial Number                                           | N/A             |
-|      0x3A     |       2      |   int16   | Frequency (Seems to update faster than 0x1F)            |                 | 
+|      0x3A     |       2      |   int16   | Frequency (Seems to update faster than 0x1F)            |                 |
+|      0x3C     |       2      |   int16   | Possibly Heatsink Temperature?                          |                 |  
 |      0x38     |       2      |   int16   | Voltage (Seems to update faster than 0x1F)              |                 |
 
 ### 0x37 - Unknown

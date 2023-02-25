@@ -8,6 +8,9 @@ This has only been tested recieving the following data from a Eddi V2.1 unit. Ot
 * Current Supply Voltage / Frequency
 * Current Grid Power / Generation Power / Divert Power
 * Total Diverted Energy
+* Active Heater Channel
+* Boost & stopped status
+
 
 
 ## Setup
