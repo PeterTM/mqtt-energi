@@ -1,3 +1,5 @@
+**!! Note - Unknown if this works with V5 firmware. I am not updating at the moment due to the many issues reported. !!**
+
 # mqtt-energi
 Protocol documentation myenergi device to device communications and mqtt bridge for local data access
 
